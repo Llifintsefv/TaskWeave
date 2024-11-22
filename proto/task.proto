@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "TaskWeave/";
+package task;
+
+service TaskService {
+    rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+    rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+    rpc GetAllTasks(GetAllTasksRequest) returns (GetAllTasksResponse);
+    rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+    rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse); // Исправлено имя сообщения
+}
+
+message Task {
+    int32 id = 1; // Добавлено ID
+    string name = 2;
+    string description = 3;
+}
+
+message CreateTaskRequest {
+    string name = 1;
+    string description = 2;
+}
+
+message CreateTaskResponse {
+    Task task = 1;
+}
+
+message GetTaskRequest {
+    int32 id = 1;
+}
+
+message GetTaskResponse {
+    Task task = 1;
+}
+
+message GetAllTasksRequest {}
+
+message GetAllTasksResponse {
+    repeated Task tasks = 1;
+}
+
+message DeleteTaskRequest {
+    int32 id = 1;
+}
+
+message DeleteTaskResponse {}
+
+message UpdateTaskRequest { 
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+message UpdateTaskResponse {
+    Task task = 1;
+}
